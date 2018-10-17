@@ -2,14 +2,66 @@ const readline = require('readline-sync');
 
 //Definicion de clases
 
+class Publicaciones{
+
+  constructor(Titulo, Autor) {
+    this.Titulo = Titulo;
+    this.Autor = Autor;
+  }
+
+  getTitulo() {
+    return this.Titulo;
+  }
+
+  setTitulo(Titulo) {
+    this.Titulo = Titulo;
+  }
+
+  getAutor() {
+    return this.Autor;
+  }
+
+  setAutor(Autor) {
+    this.Autor = Autor;
+  }
+}
+
 class ArticulosCientificos {
 
   constructor(titulo, autor, numPag, anyoPublicacion, numMenciones) {
-    this.titulo = titulo;
-    this.autor = autor;
-    this.numPag = numPag;
-    this.anyoPublicacion = anyoPublicacion;
-    this.numMenciones = numMenciones;
+    this.Titulo = titulo;
+    this.Autor = autor;
+    this.NumPag = numPag;
+    this.AnyoPublicacion = anyoPublicacion;
+    this.NumMenciones = numMenciones;
+  }
+
+  getNumPag() {
+    return this.NumPag;
+  }
+
+  setNumPag(NumPag) {
+    this.NumPag = NumPag;
+  }
+
+  getAnyoPublicacion() {
+    return this.AnyoPublicacion;
+  }
+
+  setAnyoPublicacion(AnyoPublicacion) {
+    this.AnyoPublicacion = AnyoPublicacion;
+  }
+
+  getNumMenciones() {
+    return this.NumMenciones;
+  }
+
+  setNumMenciones(NumMenciones) {
+    this.NumMenciones = NumMenciones;
+  }
+
+  isArticulo() {
+    return this._Articulo;
   }
 }
 
@@ -18,33 +70,109 @@ class ArticulosRevista extends ArticulosCientificos {
   constructor(titulo, autor, numPag, anyoPublicacion, numMenciones,
               tituloRevista, editorialAsociada, factorImpacto) {
     super(titulo, autor, numPag, anyoPublicacion, numMenciones);
-    this.tituloRevista = tituloRevista;
-    this.editorialAsociada = editorialAsociada;
-    this.factorImpacto = factorImpacto;
+    this.TituloRevista = tituloRevista;
+    this.EditorialAsociada = editorialAsociada;
+    this.FactorImpacto = factorImpacto;
+  }
+
+  getTituloRevista() {
+    return this.TituloRevista;
+  }
+
+  setTituloRevista(TituloRevista) {
+    this.TituloRevista = TituloRevista;
+  }
+
+  getEditorialAsociada() {
+    return this.EditorialAsociada;
+  }
+
+  setEditorialAsociada(EditorialAsociada) {
+    this.EditorialAsociada = EditorialAsociada;
+  }
+
+  getFactorImpacto() {
+    return this.FactorImpacto;
+  }
+
+  setFactorImpacto(FactorImpacto) {
+    this.FactorImpacto = FactorImpacto;
+  }
+
+  isRevista() {
+    return this._Revista;
   }
 }
 
-class articulosConferencia extends ArticulosCientificos {
+class ArticulosConferencia extends ArticulosCientificos {
 
   constructor(titulo, autor, numPag, anyoPublicacion, numMenciones,
               libroConferencia, nombre, lugarCelebracion) {
     super(titulo, autor, numPag, anyoPublicacion, numMenciones);
-    this.libroConferencia = libroConferencia;
-    this.nombre = nombre;
-    this.lugarCelebracion = lugarCelebracion;
+    this.LibroConferencia = libroConferencia;
+    this.Nombre = nombre;
+    this.LugarCelebracion = lugarCelebracion;
+  }
+
+  getLibroConferencia() {
+    return this.LibroConferencia;
+  }
+
+  setLibroConferencia(LibroConferencia) {
+    this.LibroConferencia = LibroConferencia;
+  }
+
+  getNombre() {
+    return this.Nombre;
+  }
+
+  setNombre(Nombre) {
+    this.Nombre = Nombre;
+  }
+
+  getLugarCelebracion() {
+    return this.LugarCelebracion;
+  }
+
+  setLugarCelebracion(LugarCelebracion) {
+    this.LugarCelebracion = LugarCelebracion;
+  }
+
+  isConferencia() {
+    return this._Conferencia;
   }
 }
 
 class patentesCientificas {
 
   constructor(autor, anyoPublicacion, anyoVencimiento) {
-    this.autor = autor;
-    this.anyoPublicacion = anyoPublicacion;
-    this.anyoVencimiento = anyoVencimiento;
+    this.Autor = autor;
+    this.AnyoPublicacion = anyoPublicacion;
+    this.AnyoVencimiento = anyoVencimiento;
+  }
+
+  getAnyoPublicacion() {
+    return this.AnyoPublicacion;
+  }
+
+  setAnyoPublicacion(AnyoPublicacion) {
+    this.AnyoPublicacion = AnyoPublicacion;
+  }
+
+  getAnyoVencimiento() {
+    return this.AnyoVencimiento;
+  }
+
+  setAnyoVencimiento(AnyoVencimiento) {
+    this.AnyoVencimiento = AnyoVencimiento;
+  }
+
+  isPatente() {
+    return this._Patente;
   }
 }
 
-//**********************************************************
+//Menu
 console.log('Hola');
 let publicaciones = [];
 let salir = false;
@@ -90,14 +218,14 @@ while (!salir) {
       let articulosConferencia = new ArticulosConferencia(titulo, autores, numPag,
                                                           anyoPublicacion, numMenciones,
                                                           libroConferencia, nombre, lugarCelebracion);
-      publications.push(ArticulosConferencia);
+      publicaciones.push(ArticulosConferencia);
     } else if (tipo === 3) {
       let titulo = readline.question('Introduce el titulo: ');
       let autores = readline.question('Introduce el autor: ');
       let anyoPublicacion = readline.questionInt('Introduce el año de publicacion: ');
       let anyoVencimiento = readline.questionInt('Introduce el año de vencimiento: ');
       let patentesCientificas = new PatentesCientificas(autores, anyoPublicacion, anyoVencimiento);
-      publications.push(patentesCientificas);
+      publicaciones.push(patentesCientificas);
     } else if (tipo === -1) {
       salir = true;
     }
@@ -168,15 +296,15 @@ while (!salir) {
           if (numMenciones === 0) numMenciones = publicaciones[i].getNumMenciones;
 
           let tituloRevista = readline.question('Introduce titulo de la revista o pulsa enter: ');
-          if (tituloRevista === '') tituloRevista = publicaciones[i].gettituloRevista;
+          if (tituloRevista === '') tituloRevista = publicaciones[i].getTituloRevista;
 
           let editorialAsociada = readline.question('Introduce nombre de la editorial o pulsa enter: ');
-          if (editorialAsociada === '') editorialAsociada = publicaciones[i].geteditorialAsociada;
+          if (editorialAsociada === '') editorialAsociada = publicaciones[i].getEditorialAsociada;
 
           let factorImpacto = readline.questionInt('Introduce factor de impacto o 0: ');
-          if (factorImpacto === 0) factorImpacto = publicaciones[i].getfactorImpacto;
+          if (factorImpacto === 0) factorImpacto = publicaciones[i].getFactorImpacto;
 
-          let autor = publicaciones[i].getautor;
+          let autor = publicaciones[i].getAutor;
 
           publicaciones.splice(i);
 
@@ -210,16 +338,16 @@ while (!salir) {
           let numMenciones = readline.questionInt('Introduce el numero de menciones o 0: ');
           if (numMenciones === 0) numMenciones = publicaciones[i].getNumMenciones;
 
-          let conferenceBookTitle = readline.question('Introduce el titulo del libro de la publicacion o pulsa enter: ');
-          if (conferenceBookTitle === '') conferenceBookTitle = publicaciones[i].getConferenceBookTitle;
+          let libroConferencia = readline.question('Introduce el titulo del libro de la publicacion o pulsa enter: ');
+          if (libroConferencia === '') libroConferencia = publicaciones[i].getLibroConferencia;
 
-          let conferenceName = readline.question('Introduce el nombre de la confeerencia o pulsa enter: ');
-          if (conferenceName === 0) conferenceName = publicaciones[i].getConferenceName;
+          let nombre = readline.question('Introduce el nombre de la conferencia o pulsa enter: ');
+          if (nombre === 0) nombre = publicaciones[i].getNombre;
 
-          let conferencePlace = readline.question('Introduce el lugar de celebracion la conferencia o pulsa enter: ');
-          if (conferencePlace === 0) conferencePlace = publicaciones[i].getConferencePlace;
+          let lugarCelebracion = readline.question('Introduce el lugar de celebracion la conferencia o pulsa enter: ');
+          if (lugarCelebracion === 0) lugarCelebracion = publicaciones[i].getLugarCelebracion;
 
-          let autor = publicaciones[i].getautor;
+          let autor = publicaciones[i].getAutor;
 
           publicaciones.splice(i);
           let patentesCientificas = new PatentesCientificas(titulo, autor, numPag, anyoPublicacion,
@@ -247,7 +375,7 @@ while (!salir) {
     let encontrado = false;
     for (let i = 0; i < publicaciones.length; i++) {
       let publicacion = publicaciones[i];
-      if (publicacion.title === titulo && publicacion.Conferencia === true) {
+      if (publicacion.Titulo === titulo && publicacion.Conferencia === true) {
         console.log('Introduce los datos que quieras modificar y deja en blanco el resto o 0 en los campos numericos');
         let titulo = readline.question('Introduce el titulo o pulsa enter: ');
         if (titulo === '') titulo = publicaciones[i].getTitulo;
@@ -262,8 +390,8 @@ while (!salir) {
 
         publicaciones.splice(i);
 
-        let scientificPatent = new ScientificPatent(titulo, autor, anyoPublicacion, anyoVencimiento);
-        publicaciones.push(scientificPatent);
+        let PatentesCientificas = new PatentesCientificas(titulo, autor, anyoPublicacion, anyoVencimiento);
+        publicaciones.push(PatentesCientificas);
 
         encontrado = true;
 
