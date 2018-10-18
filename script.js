@@ -275,11 +275,10 @@ while (!salir) {
         'Tipo: ');
     let encontrado = false;
     let titulo = readline.question('Por favor, introduce un titulo: ');
-
     if (nuevoTipo === 1) {
       for (let i = 0; i < listaPublicaciones.length; i++) {
         let publicacion = listaPublicaciones[i];
-        if (publicacion.titulo === titulo && publicacion.isReview === true) {
+        if (listaPublicaciones[i]['Titulo'] === titulo /* && publicacion.isRevista === true*/) {
           console.log('Introduce los datos que quieras modificar y los que no dejalos en blanco o 0 en los campos numericos');
           let titulo = readline.question('Introduce el titulo o pulsa enter: ');
           if (titulo === '') titulo = listaPublicaciones[i].getTitulo;
@@ -320,10 +319,13 @@ while (!salir) {
 
       console.log(listaPublicaciones[publicaciones.length - 1]);
     } else if (nuevoTipo === 2) {
+      console.log('Dentro if');
       for (let i = 0; i < listaPublicaciones.length; i++) {
         let publicacion = listaPublicaciones[i];
-        if (publicacion.titulo === titulo && publicacion.Conferencia === true) {
-          onsole.log('Introduce los datos que quieras modificar y los que no dejalos en blanco o 0 en los campos numericos');
+        console.log(listaPublicaciones[i]['Titulo']);
+        console.log('Dentro for');
+        if (listaPublicaciones[i]['Titulo'] === titulo/* && publicacion.isConferencia === true*/) {
+          console.log('Introduce los datos que quieras modificar y los que no dejalos en blanco o 0 en los campos numericos');
           let titulo = readline.question('Introduce el titulo o pulsa enter: ');
           if (titulo === '') titulo = listaPublicaciones[i].getTitulo;
 
