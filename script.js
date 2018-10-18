@@ -174,7 +174,7 @@ class patentesCientificas {
 
 //Menu
 console.log('Hola');
-let publicaciones = [];
+let listaPublicaciones = [];
 let salir = false;
 while (!salir) {
   console.log('Bienvenidos al sistema de gestion de articulos cientificos');
@@ -205,27 +205,27 @@ while (!salir) {
       let articulosRevista = new ArticulosRevista(titulo, autor, numPags, anyoPublicacion,
                                                   numMenciones, tituloRevista, editorialAsociada,
                                                   factorImpacto);
-      publicaciones.push(ArticulosRevista);
+      listaPublicaciones.push(ArticulosRevista);
     } else if (tipo === 2) {
       let titulo = readline.question('Introduce el titulo: ');
       let autor = readline.question('Introduce el autor: ');
-      let numPags = readline.questionInt('Introduce el numero de paginas: ');
+      let numPag = readline.questionInt('Introduce el numero de paginas: ');
       let anyoPublicacion = readline.questionInt('Introduce el año de publicacion: ');
       let numMenciones = readline.questionInt('Introduce el numero de menciones: ');
       let libroConferencia = readline.question('Introduce el titulo del libro de la publicacion: ');
       let nombre = readline.question('Introduce el nombre de la conferencia: ');
       let lugarCelebracion = readline.question('Introduce el lugar de celebracion la conferencia: ');
-      let articulosConferencia = new ArticulosConferencia(titulo, autores, numPag,
+      let articulosConferencia = new ArticulosConferencia(titulo, autor, numPag,
                                                           anyoPublicacion, numMenciones,
                                                           libroConferencia, nombre, lugarCelebracion);
-      publicaciones.push(ArticulosConferencia);
+      listaPublicaciones.push(articulosConferencia);
     } else if (tipo === 3) {
       let titulo = readline.question('Introduce el titulo: ');
       let autores = readline.question('Introduce el autor: ');
       let anyoPublicacion = readline.questionInt('Introduce el año de publicacion: ');
       let anyoVencimiento = readline.questionInt('Introduce el año de vencimiento: ');
       let patentesCientificas = new PatentesCientificas(autores, anyoPublicacion, anyoVencimiento);
-      publicaciones.push(patentesCientificas);
+      listaPublicaciones.push(patentesCientificas);
     } else if (tipo === -1) {
       salir = true;
     }
@@ -234,10 +234,9 @@ while (!salir) {
     //Dar de baja una publicacion
     let titulo = readline.question('Por favor, introduce un titulo: ');
     let encontrado = false;
-    for (let i = 0; i < publicaciones.length; i++) {
-      let publicacion = publicaciones[i];
-      if (publicacion.titulo === titulo) {
-        publicaciones.splice(i, 1);
+    for (let i = 0; i < listaPublicaciones.length; i++) {
+      if (listaPublicaciones[i]['Titulo'] === titulo) {
+        listaPublicaciones.splice(i, 1);
         encontrado = true;
         break;
       }
@@ -252,20 +251,19 @@ while (!salir) {
     //Modificar autores
     let titulo = readline.question('Por favor, introduce un titulo: ');
     let encontrado = false;
-    for (let i = 0; i < publicaciones.length; i++) {
-      let publication = publicaciones[i];
-      if (publication.titulo === titulo) {
+    for (let i = 0; i < listaPublicaciones.length; i++) {
+      if (listaPublicaciones[i]['Titulo'] === titulo) {
+        console.log(listaPublicaciones[i]);
         let autor = readline.question('Por favor, introduce un autor: ');
-        publicaciones[i].autor = autor;
+        listaPublicaciones[i].Autor = autor;
         encontrado = true;
-        console.log(publicaciones[i]);
         break;
       }
     }
 
     if (encontrado) {
       console.log('Publicacion encontrada y autor modificado');
-      console.log(publicaciones);
+      console.log(listaPublicaciones);
     } else {
       console.log('Publicacion no encontrada en el sistema');
     }
@@ -279,40 +277,40 @@ while (!salir) {
     let titulo = readline.question('Por favor, introduce un titulo: ');
 
     if (nuevoTipo === 1) {
-      for (let i = 0; i < publicaciones.length; i++) {
-        let publicacion = publicaciones[i];
+      for (let i = 0; i < listaPublicaciones.length; i++) {
+        let publicacion = listaPublicaciones[i];
         if (publicacion.titulo === titulo && publicacion.isReview === true) {
           console.log('Introduce los datos que quieras modificar y los que no dejalos en blanco o 0 en los campos numericos');
           let titulo = readline.question('Introduce el titulo o pulsa enter: ');
-          if (titulo === '') titulo = publicaciones[i].getTitulo;
+          if (titulo === '') titulo = listaPublicaciones[i].getTitulo;
 
           let numPags = readline.questionInt('Introduce numero de paginas o 0: ');
-          if (numPags === 0) numPags = publicaciones[i].getNumPags;
+          if (numPags === 0) numPags = listaPublicaciones[i].getNumPags;
 
           let anyoPublicacion = readline.questionInt('Introduce año de publicacion o 0: ');
-          if (anyoPublicacion === 0) anyoPublicacion = publicaciones[i].getAnyoPublicacion;
+          if (anyoPublicacion === 0) anyoPublicacion = listaPublicaciones[i].getAnyoPublicacion;
 
           let numMenciones = readline.questionInt('Introduce numero de menciones o 0: ');
-          if (numMenciones === 0) numMenciones = publicaciones[i].getNumMenciones;
+          if (numMenciones === 0) numMenciones = listaPublicaciones[i].getNumMenciones;
 
           let tituloRevista = readline.question('Introduce titulo de la revista o pulsa enter: ');
-          if (tituloRevista === '') tituloRevista = publicaciones[i].getTituloRevista;
+          if (tituloRevista === '') tituloRevista = listaPublicaciones[i].getTituloRevista;
 
           let editorialAsociada = readline.question('Introduce nombre de la editorial o pulsa enter: ');
-          if (editorialAsociada === '') editorialAsociada = publicaciones[i].getEditorialAsociada;
+          if (editorialAsociada === '') editorialAsociada = listaPublicaciones[i].getEditorialAsociada;
 
           let factorImpacto = readline.questionInt('Introduce factor de impacto o 0: ');
-          if (factorImpacto === 0) factorImpacto = publicaciones[i].getFactorImpacto;
+          if (factorImpacto === 0) factorImpacto = listaPublicaciones[i].getFactorImpacto;
 
-          let autor = publicaciones[i].getAutor;
+          let autor = listaPublicaciones[i].getAutor;
 
-          publicaciones.splice(i);
+          listaPublicaciones.splice(i);
 
           let articulosRevista = new ArticulosRevista(titulo, autor, numPags, anyoPublicacion,
                                                       numMenciones, tituloRevista,
                                                       editorialAsociada, factorImpacto);
 
-          publicaciones.push(ArticulosRevista);
+          listaPublicaciones.push(ArticulosRevista);
 
           encontrado = true;
 
@@ -320,40 +318,40 @@ while (!salir) {
         }
       }
 
-      console.log(publicaciones[publicaciones.length - 1]);
+      console.log(listaPublicaciones[publicaciones.length - 1]);
     } else if (nuevoTipo === 2) {
-      for (let i = 0; i < publicaciones.length; i++) {
-        let publicacion = publicaciones[i];
+      for (let i = 0; i < listaPublicaciones.length; i++) {
+        let publicacion = listaPublicaciones[i];
         if (publicacion.titulo === titulo && publicacion.Conferencia === true) {
           onsole.log('Introduce los datos que quieras modificar y los que no dejalos en blanco o 0 en los campos numericos');
           let titulo = readline.question('Introduce el titulo o pulsa enter: ');
-          if (titulo === '') titulo = publicaciones[i].getTitulo;
+          if (titulo === '') titulo = listaPublicaciones[i].getTitulo;
 
           let numPags = readline.questionInt('Introduce el numero de paginas o 0: ');
-          if (numPags === 0) numPags = publicaciones[i].getNumPags;
+          if (numPags === 0) numPags = listaPublicaciones[i].getNumPags;
 
           let anyoPublicacion = readline.questionInt('Introduce el año de publicacion o 0: ');
-          if (anyoPublicacion === 0) anyoPublicacion = publicaciones[i].getAnyoPublicacion;
+          if (anyoPublicacion === 0) anyoPublicacion = listaPublicaciones[i].getAnyoPublicacion;
 
           let numMenciones = readline.questionInt('Introduce el numero de menciones o 0: ');
-          if (numMenciones === 0) numMenciones = publicaciones[i].getNumMenciones;
+          if (numMenciones === 0) numMenciones = listaPublicaciones[i].getNumMenciones;
 
           let libroConferencia = readline.question('Introduce el titulo del libro de la publicacion o pulsa enter: ');
-          if (libroConferencia === '') libroConferencia = publicaciones[i].getLibroConferencia;
+          if (libroConferencia === '') libroConferencia = listaPublicaciones[i].getLibroConferencia;
 
           let nombre = readline.question('Introduce el nombre de la conferencia o pulsa enter: ');
-          if (nombre === 0) nombre = publicaciones[i].getNombre;
+          if (nombre === 0) nombre = listaPublicaciones[i].getNombre;
 
           let lugarCelebracion = readline.question('Introduce el lugar de celebracion la conferencia o pulsa enter: ');
-          if (lugarCelebracion === 0) lugarCelebracion = publicaciones[i].getLugarCelebracion;
+          if (lugarCelebracion === 0) lugarCelebracion = listaPublicaciones[i].getLugarCelebracion;
 
-          let autor = publicaciones[i].getAutor;
+          let autor = listaPublicaciones[i].getAutor;
 
-          publicaciones.splice(i);
+          listaPublicaciones.splice(i);
           let patentesCientificas = new PatentesCientificas(titulo, autor, numPag, anyoPublicacion,
                                                             numMenciones, libroConferencia, nombre,
                                                             lugarCelebracion);
-          publicaciones.push(patentesCientificas);
+          listaPublicaciones.push(patentesCientificas);
 
           encontrado = true;
 
@@ -361,37 +359,37 @@ while (!salir) {
         }
       }
 
-      console.log(publicaciones[publicaciones.length - 1]);
+      console.log(listaPublicaciones[publicaciones.length - 1]);
     }
 
     if (encontrado) {
       console.log('Publicacion encontrada y modificada');
-      console.log(publicaciones);
+      console.log(listaPublicaciones);
     } else {
       console.log('Publicacion no encontrada en el sistema');
     }
   } else if (opcion === 5) {
     //Modificar patentes cientificas
     let encontrado = false;
-    for (let i = 0; i < publicaciones.length; i++) {
-      let publicacion = publicaciones[i];
+    for (let i = 0; i < listaPublicaciones.length; i++) {
+      let publicacion = listaPublicaciones[i];
       if (publicacion.Titulo === titulo && publicacion.Conferencia === true) {
         console.log('Introduce los datos que quieras modificar y deja en blanco el resto o 0 en los campos numericos');
         let titulo = readline.question('Introduce el titulo o pulsa enter: ');
-        if (titulo === '') titulo = publicaciones[i].getTitulo;
+        if (titulo === '') titulo = listaPublicaciones[i].getTitulo;
 
         let anyoPublicacion = readline.questionInt('Introduce el año de publicacion o 0: ');
-        if (anyoPublicacion === 0) anyoPublicacion = publicaciones[i].getAnyoPublicacion;
+        if (anyoPublicacion === 0) anyoPublicacion = listaPublicaciones[i].getAnyoPublicacion;
 
         let anyoVencimiento = readline.questionInt('Introduce el año de vencimiento o 0: ');
-        if (anyoVencimiento === 0) anyoVencimiento = publicaciones[i].getAnyoVencimiento;
+        if (anyoVencimiento === 0) anyoVencimiento = listaPublicaciones[i].getAnyoVencimiento;
 
-        let autor = publicaciones[i].getAutor;
+        let autor = listaPublicaciones[i].getAutor;
 
-        publicaciones.splice(i);
+        listaPublicaciones.splice(i);
 
         let PatentesCientificas = new PatentesCientificas(titulo, autor, anyoPublicacion, anyoVencimiento);
-        publicaciones.push(PatentesCientificas);
+        listaPublicaciones.push(PatentesCientificas);
 
         encontrado = true;
 
@@ -399,11 +397,11 @@ while (!salir) {
       }
     }
 
-    console.log(publicaciones[publicaciones.length - 1]);
+    console.log(listaPublicaciones[publicaciones.length - 1]);
 
     if (encontrado) {
       console.log('Publicacion encontrada y modificada');
-      console.log(publicaciones);
+      console.log(listaPublicaciones);
     } else {
       console.log('Publicacion no encontrada en el sistema');
     }
