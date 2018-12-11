@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for fraction.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> fraction.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44.93% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>31/69</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.91% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>18/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44.93% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>31/69</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Class that represents a mathematical fraction
+ *  Numerator
+ * ------------
+ * Denominator
+ * 
+ * Offers basic arithmetic operations over fractions
+ */
+class Fraction {
+    /**
+     * Creates a fraction by providing a numerical numerator and a numerical denominator
+     * @param {Number} numerator the numerator for the fraction. Should be integer
+     * @param {Number} denominator The denominator for the fraction. Should be integer
+     * @throws {Error} If the numerator or denominator are not integers
+     */
+    constructor(numerator,denominator){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Number.isInteger(numerator)){
+<span class="cstat-no" title="statement not covered" >            throw new Error('The numerator provided is not an integer');</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Number.isInteger(denominator)){
+<span class="cstat-no" title="statement not covered" >            throw new Error('The denominator provided is not an integer');</span>
+        }
+        this.numerator = numerator;
+        this.denominator = denominator;
+        this._simplify();
+    }
+&nbsp;
+    /**
+     * Method employed internally to simplify fractions. Finds the maximum common divisor of both numerator and denominator
+     * and divides them both
+     */
+    _simplify(){
+        let mcd = Fraction.mcd(this.numerator,this.denominator);
+        this.numerator = this.numerator/mcd;
+        this.denominator = this.denominator/mcd;
+    }
+&nbsp;
+    /**
+     * Static method that finds the maximum common divisor of two numbers
+     * @param {Number} x The first number
+     * @param {Number} y The second number
+     * @returns {Number} the maximum common divisor of both numbers
+     * @throws {Error} If the first or second parameter are not integers
+     */
+    static mcd(x,y){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Number.isInteger(x)){
+<span class="cstat-no" title="statement not covered" >            throw new Error('The first parameter provided is not an integer');</span>
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!Number.isInteger(y)){
+<span class="cstat-no" title="statement not covered" >            throw new Error('The second parameter provided is not an integer');</span>
+        }
+        //The maximum common divisor must be between 1 and the minimum of both numerator and denominator
+        let maxToCheck = Math.min(x,y);
+        let maxDivisor = 1;
+        for(let i=2;i&lt;=maxToCheck;i++){
+            if(x%i===0 &amp;&amp; y%i===0){
+                maxDivisor = i;
+            }
+        }
+        return maxDivisor;
+    }
+&nbsp;
+    /**
+     * Static method that finds the minimum common multiple of two numbers
+     * @param {Number} x The first number
+     * @param {Number} y The second number
+     * @returns {Number} The minimum common multiple of the two numbers
+     * @throws {Error} If the first or second parameter are not numbers
+     */
+    static mcm(x,y){
+        if(!Number.isInteger(x)){
+            throw new Error('The first parameter provided is not an integer');
+        }
+        if(!Number.isInteger(y)){
+            throw new Error('The second parameter provided is not an integer');
+        }
+        //The minimum common multiple is between the largest of both numbers and the multiplication of both
+        let startFrom = Math.max(x,y);
+        let maxMultiple = x*y;
+&nbsp;
+        for(let i = startFrom; i&lt;=maxMultiple; i++){
+            if(i%x===0 &amp;&amp; i%y===0){
+                return i;
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return maxMultiple;</span>
+    }
+&nbsp;
+    /**
+     * Add the current fraction to another
+     * @param {Fraction} otherFraction The other fraction to be added
+     * @returns {Fraction} The fraction resulting of adding the current fraction and the other
+     * @throws {TypeError} If the parameter is not a fraction or an integer
+     */
+    add(otherFraction){
+        let paramType = typeof(otherFraction);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(paramType!== this || <span class="branch-1 cbranch-no" title="branch not covered" >paramType!==Number)</span>{
+            throw new TypeError('Add method requires another fraction');
+        }
+<span class="cstat-no" title="statement not covered" >        if(paramType == Number &amp;&amp; Number.isInteger(otherFraction)){</span>
+<span class="cstat-no" title="statement not covered" >            otherFraction = new Fraction(otherFraction,1);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            throw new TypeError('The parameter is a fraction but not an integer');</span>
+        }
+        let mcm = <span class="cstat-no" title="statement not covered" >Fraction.mcm(this.denominator,otherFraction.denominator);</span>
+        let newNumerator = <span class="cstat-no" title="statement not covered" >this.numerator*mcm/this.denominator + otherFraction.numerator*mcm/otherFraction.denominator;</span>
+        let newDenominator = <span class="cstat-no" title="statement not covered" >mcm;</span>
+        let newFraction = <span class="cstat-no" title="statement not covered" >new Fraction(newNumerator,newDenominator);</span>
+<span class="cstat-no" title="statement not covered" >        newFraction._simplify();</span>
+<span class="cstat-no" title="statement not covered" >        return newFraction;</span>
+    }
+&nbsp;
+    /**
+     * Multiplies the current fraction by another fraction or integer
+     * @param {Fraction} otherFraction The other fraction or integer to operate with
+     * @returns {Fraction} The result of multiplying both fractions
+     * @throws {TypeError} If the parameter is not a fraction or an integer
+     */
+<span class="fstat-no" title="function not covered" >    mu</span>ltiply(otherFraction){
+        let paramType = <span class="cstat-no" title="statement not covered" >typeof(otherFraction);</span>
+<span class="cstat-no" title="statement not covered" >        if(paramType!== this || paramType!==Number){</span>
+<span class="cstat-no" title="statement not covered" >            throw new TypeError('Add method requires another fraction');</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(paramType == Number &amp;&amp; Number.isInteger(otherFraction)){</span>
+<span class="cstat-no" title="statement not covered" >            otherFraction = new Fraction(otherFraction,1);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            throw new TypeError('The parameter is a fraction but not an integer');</span>
+        }
+        let newNumerator = <span class="cstat-no" title="statement not covered" >this.numerator*otherFraction.numerator;</span>
+        let newDenominator = <span class="cstat-no" title="statement not covered" >this.denominator*otherFraction.denominator;</span>
+        let newFraction = <span class="cstat-no" title="statement not covered" >new Fraction(newNumerator,newDenominator);</span>
+<span class="cstat-no" title="statement not covered" >        newFraction._simplify();</span>
+<span class="cstat-no" title="statement not covered" >        return newFraction;</span>
+    }
+&nbsp;
+    /**
+     * Gets the current faction and takes away another fraction
+     * @param {Fraction} otherFraction The other fraction to take away
+     * @returns {Fraction} The fraction resulting of taking down the parameter
+     * @throws {TypeError} if the parameter is not a fraction or integer
+     */
+<span class="fstat-no" title="function not covered" >    mi</span>nus(otherFraction){
+        let other = <span class="cstat-no" title="statement not covered" >otherFraction.multiply(-1);</span>
+<span class="cstat-no" title="statement not covered" >        return this.add(other);</span>
+    }
+&nbsp;
+    /**
+     * Divides the current fraction by another
+     * @param {Fraction} otherFraction the other fraction or integer to divide by
+     * @returns {Fraction} The result of the division
+     * @throws {TypeError} if the provided parameter is not an integer or fraction
+     */
+<span class="fstat-no" title="function not covered" >    di</span>vide(otherFraction){
+        let paramType = <span class="cstat-no" title="statement not covered" >typeof(otherFraction);</span>
+<span class="cstat-no" title="statement not covered" >        if(paramType!== this || paramType!==Number){</span>
+<span class="cstat-no" title="statement not covered" >            throw new TypeError('Add method requires another fraction');</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(paramType == Number &amp;&amp; Number.isInteger(otherFraction)){</span>
+<span class="cstat-no" title="statement not covered" >            otherFraction = new Fraction(otherFraction,1);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            throw new TypeError('The parameter is a fraction but not an integer');</span>
+        }
+        let newNumerator = <span class="cstat-no" title="statement not covered" >this.numerator*otherFraction.denominator;</span>
+        let newDenominator = <span class="cstat-no" title="statement not covered" >this.denominator*otherFraction.numerator;</span>
+        let newFraction = <span class="cstat-no" title="statement not covered" >new Fraction(newNumerator,newDenominator);</span>
+<span class="cstat-no" title="statement not covered" >        newFraction._simplify();</span>
+<span class="cstat-no" title="statement not covered" >        return newFraction;</span>
+    }
+&nbsp;
+    /**
+     * Returns the numerator of the current fraction
+     * @returns {Number} the numerator
+     */
+    getNumerator(){
+        return this.numerator;
+    }
+&nbsp;
+    /**
+     * Returns the denominator of the current fraction
+     * @returns {Number} the denominator
+     */
+    getDenominator(){
+        return this.denominator;
+    }
+};
+&nbsp;
+exports.Fraction = Fraction;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 25 2018 09:55:26 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>

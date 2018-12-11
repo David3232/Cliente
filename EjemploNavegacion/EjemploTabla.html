@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>My First Web Page</title>
+	</head>
+	<body>
+		<table border="1">
+            <thead>
+                <tr style="background-color:aquamarine">
+                    <td>Nombre</td>
+                    <td>Apellidos</td>
+                    <td>Balance</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan</td>
+                    <td>García</td>
+                    <td>10600</td>
+                </tr>
+                <tr>
+                    <td>Julia</td>
+                    <td>Rodriguez</td>
+                    <td>-40</td>
+                </tr>
+                <tr>
+                    <td>Tomás</td>
+                    <td>Perez</td>
+                    <td>88</td>
+                </tr>
+                <tr>
+                    <td>Alexa</td>
+                    <td>Mikos</td>
+                    <td>-342</td>
+                </tr>
+            </tbody>
+            <caption>Account balances</caption>
+        </table>
+				<script type="text/javascript">
+let tableElement = document.body.firstElementChild;
+for (let i = 0; i < tableElement.tBodies[0].rows.length; i++) {
+  let td = tableElement.tBodies[0].rows[i].cells[2].textContent;
+  if (td < 0) {
+    tableElement.tBodies[0].rows[i].cells[2].style = 'background-color:red;';
+  }
+}
+				</script>
+    </body>
+
+</html>
