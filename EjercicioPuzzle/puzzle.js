@@ -83,13 +83,17 @@ decreaseScore(5);
 
 //****PARTE 3*****
 
+//Redimensiona las imagenes con un maximo de 200 en alguna de las dos medidas.
 function getNewSizes(width, height) {
   let maxSize = 200;
 
+  //Maximo 200 de ancho
   if (width > height) {
     height = height * maxSize / width;
     width = maxSize;
     return [width, height];
+
+    //Maximo 200 de ancho
   } else {
     width = width * maxSize / height;
     height = maxSize;
@@ -97,14 +101,29 @@ function getNewSizes(width, height) {
   }
 }
 
+//Funcion para barajar los objetos de una array de sus posiciones.
 function shuffle(objectArray) {
+
   let quantity = objectArray.length;
 
+  //Cambiamos de posicion los objetos, alamcenando temporalmente el objeto para cambiarlo de lugar.
   for (let k = quantity - 1; k >= 1; k--) {
-    let az = Math.floor(Math.random() * i);
-    let tmp = objectArray(az);
-    let objectArray(k) = tmp;
+    let az = Math.floor(Math.random() * k);
+    tmp = objectArray[az];
+    objectArray[az] = objectArray[k];
+    objectArray[k] = tmp;
   }
+
+  return objectArray;
 }
 
+function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
+  Math.sqrt(totalNumberPieces);
+  return [row, col];
+}
+
+/*
 console.log(getNewSizes(1500, 1500));
+let array = [9, 5, 4, 1];
+console.log(shuffle(array));
+*/
