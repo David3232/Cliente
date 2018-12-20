@@ -117,10 +117,11 @@ function shuffle(objectArray) {
   return objectArray;
 }
 
-//Esta funcion recoge 2 parametros, primero la pieza que estamos buscando y segundo el total de piezas del puzzle.
-//Devolviendote la posicion de la pieza por columna y fila.
+/*Esta funcion recoge 2 parametros, primero la pieza que estamos buscando
+y segundo el total de piezas del puzzle.
+Devolviendote la posicion de la pieza por columna y fila.*/
 function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
-  
+
   //Calculamos lo larga que es cada fila.
   let row = Math.sqrt(totalNumberPieces);
 
@@ -132,23 +133,24 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
 
   //Algoritmo que convierte el numero recogido en las posiciones.
   if (numberPiece > row) {
-  	for (let i = numberPiece; i > row; i = i - row) {
-  		colPosition = colPosition + 1;
-  		rowPosition = rowPosition - row;
-  	}
+    for (let i = numberPiece; i > row; i = i - row) {
+      colPosition = colPosition + 1;
+      rowPosition = rowPosition - row;
+    }
   }
-  /* 
-  Comprobaciones de lo que nos devuelve la función.
-  console.log(Math.sqrt(totalNumberPieces) + 'Raiz del numero total');
-  console.log(colPosition + 'colPosition');
-  console.log(rowPosition + 'rowPosition');
-  */
+
   return [colPosition, rowPosition];
+
 }
 
-/*
-console.log(getNewSizes(1500, 1500));
-let array = [9, 5, 4, 1];
-console.log(shuffle(array));
-pieceNumberToRowsColumns(2,9);
-*/
+function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDirection) {
+  let table = '<table>';
+
+  //Calculamos lo larga que es cada fila.
+  let row = Math.sqrt(totalNumberPieces);
+  if (true) {
+    for (let i = 0; i < row.length; i++) {
+
+    }
+  }
+}
