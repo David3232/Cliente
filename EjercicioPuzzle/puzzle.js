@@ -144,13 +144,39 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
 }
 
 function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDirection) {
-  let table = '<table>';
+  //let table = '<table>';
+  let table = '';
+  let pieceNumber = 0;
+
+  //Calculamos lo larga que es cada columna.
+  let col = Math.sqrt(totalNumberPieces);
 
   //Calculamos lo larga que es cada fila.
   let row = Math.sqrt(totalNumberPieces);
-  if (true) {
-    for (let i = 0; i < row.length; i++) {
 
-    }
+  for (let i = 0; i <= col - 1; i++) {
+  	table = table + "<tr>";
+  	for (let i = 0; i <= row - 1; i++) {
+  		table = table + "<td id='piece" + pieceNumber + "' style='border: 3px solid black'>";
+  		table = table + '<img src="cat.jpg">'
+  		table = table + '</td>';
+  		pieceNumber++;
+  	}
+  	table = table + '</tr>';
   }
+  //table = table + '</table>';
+
+  console.log(table);
+  document.getElementsByTagName('body').innerHTML = table;
+  // crea un nuevo table 
+  // y añade contenido 
+  let newTable = document.createElement("table"); 
+  let newContent = document.createTextNode(table); 
+  newTable.appendChild(newContent); //añade las celdas al table creado. 
+
+  // añade el elemento creado y su contenido al DOM 
+  let current = document.getElementById("div_solution"); 
+  document.body.insertBefore(newTable, current);
 }
+
+createPuzzleLayout(9, 200, 200, 'left');
