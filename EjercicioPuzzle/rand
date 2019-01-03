@@ -143,14 +143,9 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
 
 }
 
-/*
-Esta funcion recoge el numero total de piezas, el ancho y el alto de las piezas, y la direccion de la imagen
-para crear una tabla como piezas.
-*/
 function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDirection) {
-
-  //Iniciamos la tabla que queremos añadir a nuestro html y el numero de pieza.
-  let table = '<table>';
+  //let table = '<table>';
+  let table = '';
   let pieceNumber = 0;
 
   //Calculamos lo larga que es cada columna.
@@ -159,37 +154,36 @@ function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDir
   //Calculamos lo larga que es cada fila.
   let row = Math.sqrt(totalNumberPieces);
 
-  //Itineramos a traves de la longitud de nuestras columnas añadiendo un tr para crearlas.
-  for (let i = 0; i <= col - 1; i++) {
-  	table = table + '<tr>';
+  //Añadimos una tabla a nuestro html
+  document.getElementsByTagName('body').innerHTML = table;
+  let newTable = document.createElement("table");
+  let current = document.getElementById("div_solution");
+  document.body.insertBefore(newTable, current);
 
-    //Itineramos a traves de la longitud de nuestras filas para añadirles el td y la imagen de fondo correspondiente.
-    //Ademas de contar el numero de piezas que llevamos.
+
+  for (let i = 0; i <= col - 1; i++) {
+  	//table = table + '<tr>';
   	for (let i = 0; i <= row - 1; i++) {
-  		table = table + "<td id='piece" + pieceNumber + "' style='height:" + heightPuzzle/row + "px; width:" + widthPuzzle/col + "px; background-image: url(" + '"' + imgDirection + '"' + "); border: 3px solid black'>";
+  		/*
+      table = table + "<td id='piece" + pieceNumber + "' style='border: 3px solid black'>";
+  		table = table + '<img src="cat.jpg">'
   		table = table + '</td>';
+      */
   		pieceNumber++;
   	}
-
-    //Cerramos la columna.
-  	table = table + '</tr>';
+  	//table = table + '</tr>';
   }
+  //table = table + '</table>';
 
-  //Cerramos la tabla.
-  table = table + '</table>';
+  console.log(table);
+  /*
+  // crea un nuevo table
+  // y añade contenido
+  let newContent = document.createTextNode(table);
+  newTable.appendChild(newContent); //añade las celdas al table creado.
 
-  //Añadimos antes de el div_solution nuestra tabla.
-  let current = document.getElementById("div_solution");
-  current.insertAdjacentHTML('beforebegin', table);
+
+  */
 }
 
-function pieceToOffset (pieceNumber, widthPuzzle, heightPuzzle, totalNumberPieces) {
-  let widthPiece = widthPuzzle/Math.sqrt(totalNumberPieces);
-  let heightPiece = heightPuzzle/Math.sqrt(totalNumberPieces);
-  let position = pieceNumberToRowsColumns(pieceNumber, totalNumberPieces);
-
-  let displacement = [];
-  //Tengo que calcular cuanto hay que desplazar el fondo, pensar como.
-}
-
-createPuzzleLayout(9, 300, 300, 'cat.jpg');
+createPuzzleLayout(4, 200, 200, 'left');
