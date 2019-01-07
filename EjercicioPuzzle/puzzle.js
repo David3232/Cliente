@@ -5,8 +5,10 @@ function getNumberPiecesFromUser() {
   //Iniciamos la variable que condiciona si pedimos al usuario el numero de piezas o no de nuevo.
   let condition = true;
 
-  /*Iniciamos la variable que queremos devolver,
-  con el fin de evitar  el error por no haberla definido.*/
+  /*
+   *  Iniciamos la variable que queremos devolver,
+   *  con el fin de evitar  el error por no haberla definido.
+   */
   let puzzlePieces = 0;
 
   //Pedimos el numero de piezas hasta que se nos demuestre que es valido.
@@ -71,14 +73,14 @@ function decreaseScore(number) {
 }
 
 /*
-let numPieces = getNumberPiecesFromUser();
-console.log(getMaxScore(numPieces));
-
-console.log(getScore());
-
-updateScore(90);
-
-decreaseScore(5);
+ *  let numPieces = getNumberPiecesFromUser();
+ *  console.log(getMaxScore(numPieces));
+ *
+ *  console.log(getScore());
+ *
+ *  updateScore(90);
+ *
+ *  decreaseScore(5);
 */
 
 //****PARTE 3*****
@@ -117,9 +119,13 @@ function shuffle(objectArray) {
   return objectArray;
 }
 
-/*Esta funcion recoge 2 parametros, primero la pieza que estamos buscando
-y segundo el total de piezas del puzzle.
-Devolviendote la posicion de la pieza por columna y fila.*/
+/*
+ *  Esta funcion recoge 2 parametros:
+ *  La pieza que estamos buscando
+ *  El total de piezas del puzzle.
+ *
+ *  Devolviendote la posicion de la pieza por columna y fila.
+ */
 function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
 
   //Calculamos lo larga que es cada fila.
@@ -128,24 +134,28 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
   //let col = Math.sqrt(totalNumberPieces);
 
   //Establecemos la posicion inicial antes de usar el algoritmo.
-  let colPosition = 1;
+  let colPosition = 0;
   let rowPosition = numberPiece;
 
   //Algoritmo que convierte el numero recogido en las posiciones.
-  if (numberPiece > row) {
-    for (let i = numberPiece; i > row; i = i - row) {
+  if (numberPiece + 1 > row) {
+    for (let i = numberPiece + 1; i > row; i = i - row) {
       colPosition = colPosition + 1;
       rowPosition = rowPosition - row;
     }
   }
 
   return [colPosition, rowPosition];
-
 }
 
 /*
-Esta funcion recoge el numero total de piezas, el ancho y el alto de las piezas, y la direccion de la imagen
-para crear una tabla como piezas.
+ *  Esta funcion recoge:
+ *  Numero total de piezas
+ *  El ancho
+ *  El alto de las piezas
+ *  La direccion de la imagen
+ *
+ *  Para crear una tabla como piezas.
 */
 function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDirection) {
 
@@ -161,35 +171,81 @@ function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDir
 
   //Itineramos a traves de la longitud de nuestras columnas añadiendo un tr para crearlas.
   for (let i = 0; i <= col - 1; i++) {
-  	table = table + '<tr>';
+    table = table + '<tr>';
 
-    //Itineramos a traves de la longitud de nuestras filas para añadirles el td y la imagen de fondo correspondiente.
-    //Ademas de contar el numero de piezas que llevamos.
-  	for (let i = 0; i <= row - 1; i++) {
-  		table = table + "<td id='piece" + pieceNumber + "' style='height:" + heightPuzzle/row + "px; width:" + widthPuzzle/col + "px; background-image: url(" + '"' + imgDirection + '"' + "); border: 3px solid black'>";
-  		table = table + '</td>';
-  		pieceNumber++;
-  	}
+    /*
+     * Itineramos a traves de la longitud de nuestras filas
+     * para añadirles el td y la imagen de fondo correspondiente.
+     *  Ademas de contar el numero de piezas que llevamos-
+     */
+    for (let i = 0; i <= row - 1; i++) {
+      table = table + "<td id='piece" + pieceNumber + "' style='height:" + heightPuzzle / row + "px; width:" + widthPuzzle/col + "px; background-image: url(" + '"' + imgDirection + '"' + "); border: 3px solid black'>";
+      table = table + '</td>';
+      pieceNumber++;
+    }
 
     //Cerramos la columna.
-  	table = table + '</tr>';
+    table = table + '</tr>';
   }
 
   //Cerramos la tabla.
   table = table + '</table>';
 
   //Añadimos antes de el div_solution nuestra tabla.
-  let current = document.getElementById("div_solution");
+  let current = document.getElementById('div_solution');
   current.insertAdjacentHTML('beforebegin', table);
 }
 
-function pieceToOffset (pieceNumber, widthPuzzle, heightPuzzle, totalNumberPieces) {
-  let widthPiece = widthPuzzle/Math.sqrt(totalNumberPieces);
-  let heightPiece = heightPuzzle/Math.sqrt(totalNumberPieces);
+/*
+ *  Esta funcion recoge:
+ *  el numero de la pieza a calcular el desplazamiento
+ *  la anchura
+ *  la altura
+ *  el numero total de piezas
+ *
+ *  Nos devuelve el desplazamiento de dicha pieza.
+ */
+function pieceToOffset(pieceNumber, widthPuzzle, heightPuzzle, totalNumberPieces) {
+
+  //Calculamos el ancho y alto de las piezas
+  let widthPiece = widthPuzzle / Math.sqrt(totalNumberPieces);
+  let heightPiece = heightPuzzle / Math.sqrt(totalNumberPieces);
+
+  //Calculamos la posicion de la pieza en el puzzle.
   let position = pieceNumberToRowsColumns(pieceNumber, totalNumberPieces);
 
+  // Inicializamos una array 'displacement' para almacenar el desplazamiento en dos coordenadas.
   let displacement = [];
-  //Tengo que calcular cuanto hay que desplazar el fondo, pensar como.
+  let x = position[0] * widthPiece * -1;
+  let y = position[1] * heightPiece * -1;
+  displacement = [x, y];
+
+  //Devolvemos el desplazamiento de la pieza.
+  return displacement;
 }
 
+/*
+ *  Esta funcion recoge:
+ *  la anchura
+ *  la altura
+ *  el numero total de piezas
+ *
+ *  Nos devuelve un array con el desplazamiento de las piezas.
+ */
+function createReferenceSolution(widthPuzzle, heightPuzzle, totalNumberPieces) {
+  let pieces = [];
+  for (let i = 0; i < totalNumberPieces; i++) {
+    pieces[i] = pieceToOffset(i, widthPuzzle, heightPuzzle, totalNumberPieces);
+  }
+
+  return pieces;
+}
+
+function drawContentPuzzle(displacementArray) {
+
+}
+
+console.log(pieceNumberToRowsColumns(1, 9));
 createPuzzleLayout(9, 300, 300, 'cat.jpg');
+console.log(pieceToOffset(0, 300, 300, 9));
+console.log(createReferenceSolution(300, 300, 9));
