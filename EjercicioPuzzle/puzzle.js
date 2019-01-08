@@ -73,6 +73,8 @@ function decreaseScore(number) {
 }
 
 /*
+ *	Pruebas.
+ *
  *  let numPieces = getNumberPiecesFromUser();
  *  console.log(getMaxScore(numPieces));
  *
@@ -160,7 +162,7 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
 function createPuzzleLayout(totalNumberPieces, widthPuzzle, heightPuzzle, imgDirection) {
 
   //Iniciamos la tabla que queremos añadir a nuestro html y el numero de pieza.
-  let table = '<table>';
+  let table = '<table id="puzzleTable">';
   let pieceNumber = 0;
 
   //Calculamos lo larga que es cada columna.
@@ -233,7 +235,11 @@ function pieceToOffset(pieceNumber, widthPuzzle, heightPuzzle, totalNumberPieces
  *  Nos devuelve un array con el desplazamiento de las piezas.
  */
 function createReferenceSolution(widthPuzzle, heightPuzzle, totalNumberPieces) {
+  
+  //Inicializamos el array donde vamos a contener el desplazamiento de cada pieza.
   let pieces = [];
+
+  //Añadimos a nuestro array cada pieza asociada a su posicion.
   for (let i = 0; i < totalNumberPieces; i++) {
     pieces[i] = pieceToOffset(i, widthPuzzle, heightPuzzle, totalNumberPieces);
   }
@@ -241,11 +247,38 @@ function createReferenceSolution(widthPuzzle, heightPuzzle, totalNumberPieces) {
   return pieces;
 }
 
+/*
+ *  Esta funcion recoge:
+ *  array de desplazamientos
+ *
+ *  La función cambiará el fondo de cada una de las celdas de la tabla con el desplazamiento indicado.
+ */
 function drawContentPuzzle(displacementArray) {
+	//let displacementToSplit = displacementArray[0].toString();
+	//let displacementSplited = displacementToSplit.split(",");
+	//let displacementInPixels = displacementSplited[0] + 'px ' + displacementSplited[1] + 'px';
+	//document.getElementById('puzzleTable').rows[0].cells[0].style.backgroundPosition=displacementInPixels;
 
+	let position = 0;
+
+	for (let x = 0; x < document.getElementById('puzzleTable').rows.length; x++) {
+		console.log('Primer for');
+		for (let i = 0; i < document.getElementById('puzzleTable').rows[x].cells.length; i++) {
+			console.log('Segundo log');
+			
+			let displacementToSplit = displacementArray[position].toString();
+			let displacementSplited = displacementToSplit.split(",");
+			let displacementInPixels = displacementSplited[1] + 'px ' + displacementSplited[0] + 'px';
+			document.getElementById('puzzleTable').rows[x].cells[i].style.backgroundPosition=displacementInPixels;
+			position++;
+			console.log(x);
+			console.log(i);
+		}
+	}
 }
 
-console.log(pieceNumberToRowsColumns(1, 9));
-createPuzzleLayout(9, 300, 300, 'cat.jpg');
-console.log(pieceToOffset(0, 300, 300, 9));
-console.log(createReferenceSolution(300, 300, 9));
+//console.log(pieceNumberToRowsColumns(1, 9));
+createPuzzleLayout(9, 900, 900, 'cat.jpg');
+drawContentPuzzle(createReferenceSolution(900, 900, 9));
+//console.log(pieceToOffset(0, 300, 300, 9));
+//console.log(createReferenceSolution(300, 300, 9));
