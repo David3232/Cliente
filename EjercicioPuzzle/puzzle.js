@@ -345,13 +345,17 @@ function initGame(imgURL, totalNumberPieces) {
  *  
  */
 function gameLogic(image, totalNumberPieces) {
-	//Se que aqui debo usar la funcion suffle()
 
-	function mouseClick() {
-		if (this.style.borderColor == 'black') {
-			
-		}
-	}
+	//Guardamos la puntuacion maxima que se puede conseguir.
+	let score = getMaxScore(totalNumberPieces);
+
+	//Actualizamos el score en el html
+	updateScore(puntuacion);
+
+	//Obtenemos el score del usuario.
+	let scoreborad = getScore();
+
+	
 }
 
 //checkIfSolution([1, 2, 3], [1, 3, 3]);
