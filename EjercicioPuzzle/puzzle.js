@@ -150,6 +150,8 @@ function pieceNumberToRowsColumns(numberPiece, totalNumberPieces) {
   return [colPosition, rowPosition];
 }
 
+//****PARTE 4*****
+
 /*
  *  Esta funcion recoge:
  *  Numero total de piezas
@@ -235,7 +237,7 @@ function pieceToOffset(pieceNumber, widthPuzzle, heightPuzzle, totalNumberPieces
  *  Nos devuelve un array con el desplazamiento de las piezas.
  */
 function createReferenceSolution(widthPuzzle, heightPuzzle, totalNumberPieces) {
-  
+
   //Inicializamos el array donde vamos a contener el desplazamiento de cada pieza.
   let pieces = [];
 
@@ -254,31 +256,81 @@ function createReferenceSolution(widthPuzzle, heightPuzzle, totalNumberPieces) {
  *  La función cambiará el fondo de cada una de las celdas de la tabla con el desplazamiento indicado.
  */
 function drawContentPuzzle(displacementArray) {
-	//let displacementToSplit = displacementArray[0].toString();
-	//let displacementSplited = displacementToSplit.split(",");
-	//let displacementInPixels = displacementSplited[0] + 'px ' + displacementSplited[1] + 'px';
-	//document.getElementById('puzzleTable').rows[0].cells[0].style.backgroundPosition=displacementInPixels;
+  //Iniciamos la posicion que vamos a desplazar.
+  let position = 0;
 
-	let position = 0;
+  //Recorremos la longitud de columnas que hay, para poder modificar cada celda de la columna.
+  for (let x = 0; x < document.getElementById('puzzleTable').rows.length; x++) {
+    //Recorremos cada celda para cambiar el posicionamiento.
+    for (let i = 0; i < document.getElementById('puzzleTable').rows[x].cells.length; i++) {
 
-	for (let x = 0; x < document.getElementById('puzzleTable').rows.length; x++) {
-		console.log('Primer for');
-		for (let i = 0; i < document.getElementById('puzzleTable').rows[x].cells.length; i++) {
-			console.log('Segundo log');
-			
-			let displacementToSplit = displacementArray[position].toString();
-			let displacementSplited = displacementToSplit.split(",");
-			let displacementInPixels = displacementSplited[1] + 'px ' + displacementSplited[0] + 'px';
-			document.getElementById('puzzleTable').rows[x].cells[i].style.backgroundPosition=displacementInPixels;
-			position++;
-			console.log(x);
-			console.log(i);
-		}
-	}
+      //Convertimos nuestro array con el desplazamiento a algo usable por css.
+      let displacementToSplit = displacementArray[position].toString();
+      let displacementSplited = displacementToSplit.split(',');
+      let displacementInPixels = displacementSplited[1] + 'px ' + displacementSplited[0] + 'px';
+
+      //Guardamos una variable con cada celda, y le añadimos el desplazamiento.
+      let cell = document.getElementById('puzzleTable').rows[x].cells[i];
+      cell.style.backgroundPosition = displacementInPixels;
+
+      //Por ultimo, cambiamos la posicion.
+      position++;
+    }
+  }
 }
 
-//console.log(pieceNumberToRowsColumns(1, 9));
 createPuzzleLayout(9, 900, 900, 'cat.jpg');
 drawContentPuzzle(createReferenceSolution(900, 900, 9));
-//console.log(pieceToOffset(0, 300, 300, 9));
-//console.log(createReferenceSolution(300, 300, 9));
+/*
+ *  console.log(pieceNumberToRowsColumns(1, 9));
+ *  console.log(pieceToOffset(0, 300, 300, 9));
+ *  console.log(createReferenceSolution(300, 300, 9));
+ */
+
+//****PARTE 5*****
+
+/*
+ *  Esta funcion recoge:
+ *  la solución del puzzle y el estado actual
+ *
+ *  La función devolverá si el puzzle está terminado
+ */
+function checkIfSolution(puzzleSolution, currentState) {
+  //Iniciamos la variable que determina si el puzzle se a terminado o no.
+  let isFinished = true;
+
+  /*
+   *  Ahora recorremos lar arrays, y si alguna posicion es incorrecta
+   *  cambiamos la variable para devolver que el puzzle no esta resuelto.
+   */
+  for (let i = 0; i < puzzleSolution.length; i++) {
+    if (puzzleSolution[i] !== currentState[i]) {
+      isFinished = false;
+    }
+  }
+
+  //Devolvemos si el puzzle esta terminado.
+  return isFinished;
+}
+
+/*
+ *  Esta funcion recoge:
+ *  la URL de una imagen
+ *  el número de piezas del puzzle
+ *
+ *  Esta función carga dinámicamente una imagen en JavaScript a partir de una URL.
+ *  Cuando la imagen está cargada en el objeto, se dispara un evento que ejecuta la lógica del juego.
+ */
+function initGame(imgURL, totalNumberPieces) {
+
+  //Inicializamos una variable para contener una imagen.
+  let img = new Image();
+  img.addEventListener('load', function () {
+    gameLogic(img, totalNumberPieces);
+  });
+
+  img.src = imgURL;
+
+}
+
+//checkIfSolution([1, 2, 3], [1, 3, 3]);
