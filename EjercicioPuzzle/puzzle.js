@@ -325,12 +325,33 @@ function initGame(imgURL, totalNumberPieces) {
 
   //Inicializamos una variable para contener una imagen.
   let img = new Image();
+
+  //Cuando esta, cargue, se ejecute dicha funcion.
   img.addEventListener('load', function () {
     gameLogic(img, totalNumberPieces);
   });
 
+  //Se añade el scr a la imagen.
   img.src = imgURL;
 
+}
+
+/*
+ *  Esta funcion recoge:
+ *  un objeto de tipo Image
+ * 	el número de piezas del puzzle
+ *
+ *  La función inicializará los elementos HTML del juego, creando un punto de inicio aleatorio.
+ *  
+ */
+function gameLogic(image, totalNumberPieces) {
+	//Se que aqui debo usar la funcion suffle()
+
+	function mouseClick() {
+		if (this.style.borderColor == 'black') {
+			
+		}
+	}
 }
 
 //checkIfSolution([1, 2, 3], [1, 3, 3]);
