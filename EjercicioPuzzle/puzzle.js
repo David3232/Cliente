@@ -335,23 +335,27 @@ function initGame(imgURL, totalNumberPieces) {
 }
 
 /*
- *
+ *	Por comentar
  */
 function f(event) {
-  if (selectedPïece == undefined) {
-    selectedPïece = event.curretTarget;
-    selectedPïece.style.borderColor = 'red';
-  } else if (event.curretTarget == selectedPïece) {
-    selectedPïece = undefined;
+  if (selectedPiece == undefined) {
+    selectedPiece = parseInt(this.id.substr(5, this.id.length));//Revisar a partir de aqui.
+    console.log(selectedPiece);
+    this.style.borderColor = 'red';
+  } else if (event.curretTarget == selectedPiece) {
+    selectedPiece = undefined;
   } else {
-    let temporalPiece = event.curretTarget;
+    let temporalPiece = event.currentTarget;
     let temporalPieceBgPosition = temporalPiece.style.backgroundPosition;
-    temporalPiece.style.backgroundPosition = selectedPïece.style.backgroundPosition;
-    selectedPïece.style.backgroundPosition = temporalPieceBgPosition;
-    selectedPïece.style.borderColor = 'black';
+    temporalPiece.style.backgroundPosition = selectedPiece.style.backgroundPosition;
+    selectedPiece.style.backgroundPosition = temporalPieceBgPosition;
+    selectedPiece.style.borderColor = 'black';
     decreaseScore(1);
-
-    checkIfSolution();
+    
+    if (checkIfSolution(solution, mixedPuzzle)) {
+    	alert('Has ganado crack');
+    }
+    event.removeEventListener('click', f);
   }
 }
 
@@ -365,25 +369,40 @@ function f(event) {
  */
 function gameLogic(image, totalNumberPieces) {
 
+	//Creamos la tabla que representara nuestro puzzle.
+  createPuzzleLayout(totalNumberPieces, image.width, image.height, 'cat.jpg');
+
+  //La función cambiará el fondo de cada una de las celdas de la tabla con el desplazamiento indicado.
+  drawContentPuzzle(createReferenceSolution(image.width, image.height, totalNumberPieces));
+
   //Guardamos la puntuacion maxima que se puede conseguir.
   let score = getMaxScore(totalNumberPieces);
 
   //Actualizamos el score en el html
-  updateScore(puntuacion);
+  updateScore(score);
 
   //Obtenemos el score del usuario.
   let scoreborad = getScore();
 
   //Obtenemos la solucion.
-  let solution = createReferenceSolution();
+  solution = createReferenceSolution();
 
-  element.addEventListener('click', f);
+  //Obtenemos el estado actual del puzzle.
+  for (let i = 0; i < totalNumberPieces; i++) {
+  	let newBackgroundPosition = document.getElementById('piece' + i).style.backgroundPosition;
+  	mixedPuzzle.push(newBackgroundPosition);
+  }
+
+  this.addEventListener('click', f);
 
 }
 
 //checkIfSolution([1, 2, 3], [1, 3, 3]);
-let selectedPïece = undefined;
+//createPuzzleLayout(9, 900, 900, 'cat.jpg');
+
+//getNumberPiecesFromUser();
+initGame('cat.jpg', getNumberPiecesFromUser());
+
+let selectedPiece = undefined;
 let solution = undefined;
-let puzzleMezclado = undefined;
-createPuzzleLayout(9, 900, 900, 'cat.jpg');
-drawContentPuzzle(createReferenceSolution(900, 900, 9));
+let mixedPuzzle = [];
