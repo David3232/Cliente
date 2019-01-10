@@ -279,8 +279,6 @@ function drawContentPuzzle(displacementArray) {
   }
 }
 
-createPuzzleLayout(9, 900, 900, 'cat.jpg');
-drawContentPuzzle(createReferenceSolution(900, 900, 9));
 /*
  *  console.log(pieceNumberToRowsColumns(1, 9));
  *  console.log(pieceToOffset(0, 300, 300, 9));
@@ -337,25 +335,55 @@ function initGame(imgURL, totalNumberPieces) {
 }
 
 /*
+ *
+ */
+function f(event) {
+  if (selectedPïece == undefined) {
+    selectedPïece = event.curretTarget;
+    selectedPïece.style.borderColor = 'red';
+  } else if (event.curretTarget == selectedPïece) {
+    selectedPïece = undefined;
+  } else {
+    let temporalPiece = event.curretTarget;
+    let temporalPieceBgPosition = temporalPiece.style.backgroundPosition;
+    temporalPiece.style.backgroundPosition = selectedPïece.style.backgroundPosition;
+    selectedPïece.style.backgroundPosition = temporalPieceBgPosition;
+    selectedPïece.style.borderColor = 'black';
+    decreaseScore(1);
+
+    checkIfSolution();
+  }
+}
+
+/*
  *  Esta funcion recoge:
  *  un objeto de tipo Image
  * 	el número de piezas del puzzle
  *
  *  La función inicializará los elementos HTML del juego, creando un punto de inicio aleatorio.
- *  
+ *
  */
 function gameLogic(image, totalNumberPieces) {
 
-	//Guardamos la puntuacion maxima que se puede conseguir.
-	let score = getMaxScore(totalNumberPieces);
+  //Guardamos la puntuacion maxima que se puede conseguir.
+  let score = getMaxScore(totalNumberPieces);
 
-	//Actualizamos el score en el html
-	updateScore(puntuacion);
+  //Actualizamos el score en el html
+  updateScore(puntuacion);
 
-	//Obtenemos el score del usuario.
-	let scoreborad = getScore();
+  //Obtenemos el score del usuario.
+  let scoreborad = getScore();
 
-	
+  //Obtenemos la solucion.
+  let solution = createReferenceSolution();
+
+  element.addEventListener('click', f);
+
 }
 
 //checkIfSolution([1, 2, 3], [1, 3, 3]);
+let selectedPïece = undefined;
+let solution = undefined;
+let puzzleMezclado = undefined;
+createPuzzleLayout(9, 900, 900, 'cat.jpg');
+drawContentPuzzle(createReferenceSolution(900, 900, 9));
