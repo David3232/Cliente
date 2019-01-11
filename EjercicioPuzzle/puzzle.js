@@ -335,27 +335,34 @@ function initGame(imgURL, totalNumberPieces) {
 }
 
 /*
- *	Por comentar
+ *	Esta funcion recoge:
+ *  el evento heredado
+ *
+ *  La función se ocupa de manejar el cambio de las piezas.
  */
 function f(event) {
   if (selectedPiece == undefined) {
-    console.log(this.id);
-    selectedPiece = parseInt(this.id.substr(5, this.id.length));//Revisar a partir de aqui.
+    selectedPiece = parseInt(this.id.substr(5, this.id.length));
     this.style.borderColor = 'red';
-  } else if (event.curretTarget == selectedPiece) {
+  } else if (parseInt(this.id.substr(5, this.id.length)) == selectedPiece) {
     selectedPiece = undefined;
+    this.style.borderColor = 'black';
   } else {
-    let temporalPiece = event.currentTarget;
-    let temporalPieceBgPosition = temporalPiece.style.backgroundPosition;
-    temporalPiece.style.backgroundPosition = selectedPiece.style.backgroundPosition;
-    selectedPiece.style.backgroundPosition = temporalPieceBgPosition;
-    selectedPiece.style.borderColor = 'black';
+    let temporalPiece = parseInt(this.id.substr(5, this.id.length));;
+    console.log(temporalPiece + ' Pieza en variable temporal');
+    let temporalPieceBgPosition = document.getElementById('piece' + temporalPiece).style.backgroundPosition;
+    console.log(temporalPieceBgPosition + ' temporalPieceBgPosition');
+    console.log(document.getElementById('piece' + temporalPiece).style.backgroundPosition + ' la antigua posicion');
+    this.style.backgroundPosition = document.getElementById('piece' + temporalPiece).style.backgroundPosition;
+    console.log(this.style.backgroundPosition + ' aqui la nueva posición');
+    document.getElementById('piece' + temporalPiece).style.backgroundPosition = temporalPieceBgPosition;
+    document.getElementById('piece' + temporalPiece).style.borderColor = 'black';
     decreaseScore(1);
 
-    if (checkIfSolution(solution, mixedPuzzle)) {
+    /*if (checkIfSolution(solution, mixedPuzzle)) {
     	alert('Has ganado crack');
-    }
-    event.removeEventListener('click', f);
+    }*/
+    //event.removeEventListener('click', f);
   }
 }
 
@@ -369,7 +376,7 @@ function f(event) {
  */
 function gameLogic(image, totalNumberPieces) {
 
-	//Creamos la tabla que representara nuestro puzzle.
+  //Creamos la tabla que representara nuestro puzzle.
   createPuzzleLayout(totalNumberPieces, image.width, image.height, 'cat.jpg');
 
   //La función cambiará el fondo de cada una de las celdas de la tabla con el desplazamiento indicado.
@@ -394,17 +401,15 @@ function gameLogic(image, totalNumberPieces) {
   }
 
   for (let i = 0; i < mixedPuzzle.length; i++) {
-
+    celda = document.getElementById('piece' + i);
+    celda.addEventListener('click', f);
   }
-  this.addEventListener('click', f);
+
 
 }
 
-//checkIfSolution([1, 2, 3], [1, 3, 3]);
-//createPuzzleLayout(9, 900, 900, 'cat.jpg');
-
-//getNumberPiecesFromUser();
-initGame('cat.jpg', getNumberPiecesFromUser());
+//Main Script
+initGame('cat.jpg', 9/*getNumberPiecesFromUser()*/);
 
 let selectedPiece = undefined;
 let solution = undefined;
