@@ -294,21 +294,21 @@ function drawContentPuzzle(displacementArray) {
  *  La función devolverá si el puzzle está terminado
  */
 function checkIfSolution(puzzleSolution, currentState) {
-  //Iniciamos la variable que determina si el puzzle se a terminado o no.
-  let isFinished = true;
 
   /*
    *  Ahora recorremos lar arrays, y si alguna posicion es incorrecta
    *  cambiamos la variable para devolver que el puzzle no esta resuelto.
    */
   for (let i = 0; i < puzzleSolution.length; i++) {
+    console.log(puzzleSolution);
+    console.log(currentState)
     if (puzzleSolution[i] !== currentState[i]) {
-      isFinished = false;
+      return false
     }
   }
 
   //Devolvemos si el puzzle esta terminado.
-  return isFinished;
+  return true;
 }
 
 /*
@@ -340,28 +340,27 @@ function initGame(imgURL, totalNumberPieces) {
  *
  *  La función se ocupa de manejar el cambio de las piezas.
  */
-function f(event) {
+function f() {
   if (selectedPiece == undefined) {
-    selectedPiece = parseInt(this.id.substr(5, this.id.length));
+    selectedPiece = this.id;
     this.style.borderColor = 'red';
-  } else if (parseInt(this.id.substr(5, this.id.length)) == selectedPiece) {
+  } else if (this.id == selectedPiece) {
     selectedPiece = undefined;
     this.style.borderColor = 'black';
   } else {
-    let temporalPiece = parseInt(this.id.substr(5, this.id.length));;
-    console.log(temporalPiece + ' Pieza en variable temporal');
-    let temporalPieceBgPosition = document.getElementById('piece' + temporalPiece).style.backgroundPosition;
-    console.log(temporalPieceBgPosition + ' temporalPieceBgPosition');
-    console.log(document.getElementById('piece' + temporalPiece).style.backgroundPosition + ' la antigua posicion');
-    this.style.backgroundPosition = document.getElementById('piece' + temporalPiece).style.backgroundPosition;
-    console.log(this.style.backgroundPosition + ' aqui la nueva posición');
-    document.getElementById('piece' + temporalPiece).style.backgroundPosition = temporalPieceBgPosition;
-    document.getElementById('piece' + temporalPiece).style.borderColor = 'black';
+    let temporalPiece = this.id;
+    let temporalPieceBgPosition = document.getElementById(temporalPiece).style.backgroundPosition;
+    let selectedPieceBgPosition = document.getElementById(selectedPiece).style.backgroundPosition;
+    document.getElementById(temporalPiece).style.backgroundPosition = selectedPieceBgPosition;
+    document.getElementById(selectedPiece).style.backgroundPosition = temporalPieceBgPosition;
+    document.getElementById(selectedPiece).style.borderColor = 'black';
+    selectedPiece = undefined;
     decreaseScore(1);
+    console.log(checkIfSolution(solution, mixedPuzzle));
 
-    /*if (checkIfSolution(solution, mixedPuzzle)) {
+    if (checkIfSolution(solution, mixedPuzzle)) {
     	alert('Has ganado crack');
-    }*/
+    }
     //event.removeEventListener('click', f);
   }
 }
@@ -392,15 +391,18 @@ function gameLogic(image, totalNumberPieces) {
   let scoreborad = getScore();
 
   //Obtenemos la solucion.
-  solution = createReferenceSolution();
+  solution = createReferenceSolution(image.width, image.height, totalNumberPieces);
 
   //Obtenemos el estado actual del puzzle.
   for (let i = 0; i < totalNumberPieces; i++) {
   	let newBackgroundPosition = document.getElementById('piece' + i).style.backgroundPosition;
-  	mixedPuzzle.push(newBackgroundPosition);
+    let newBackgroundPositionArray = newBackgroundPosition.split(' ');
+    let bgPositionX = parseInt(newBackgroundPositionArray[0]);
+    let bgPositionY = parseInt(newBackgroundPositionArray[1]);
+  	mixedPuzzle.push(bgPositionX, bgPositionY);
   }
 
-  for (let i = 0; i < mixedPuzzle.length; i++) {
+  for (let i = 0; i < totalNumberPieces; i++) {
     celda = document.getElementById('piece' + i);
     celda.addEventListener('click', f);
   }
