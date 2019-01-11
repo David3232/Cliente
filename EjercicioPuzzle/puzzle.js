@@ -339,8 +339,8 @@ function initGame(imgURL, totalNumberPieces) {
  */
 function f(event) {
   if (selectedPiece == undefined) {
+    console.log(this.id);
     selectedPiece = parseInt(this.id.substr(5, this.id.length));//Revisar a partir de aqui.
-    console.log(selectedPiece);
     this.style.borderColor = 'red';
   } else if (event.curretTarget == selectedPiece) {
     selectedPiece = undefined;
@@ -351,7 +351,7 @@ function f(event) {
     selectedPiece.style.backgroundPosition = temporalPieceBgPosition;
     selectedPiece.style.borderColor = 'black';
     decreaseScore(1);
-    
+
     if (checkIfSolution(solution, mixedPuzzle)) {
     	alert('Has ganado crack');
     }
@@ -373,7 +373,7 @@ function gameLogic(image, totalNumberPieces) {
   createPuzzleLayout(totalNumberPieces, image.width, image.height, 'cat.jpg');
 
   //La función cambiará el fondo de cada una de las celdas de la tabla con el desplazamiento indicado.
-  drawContentPuzzle(createReferenceSolution(image.width, image.height, totalNumberPieces));
+  drawContentPuzzle(shuffle(createReferenceSolution(image.width, image.height, totalNumberPieces)));
 
   //Guardamos la puntuacion maxima que se puede conseguir.
   let score = getMaxScore(totalNumberPieces);
@@ -393,6 +393,9 @@ function gameLogic(image, totalNumberPieces) {
   	mixedPuzzle.push(newBackgroundPosition);
   }
 
+  for (let i = 0; i < mixedPuzzle.length; i++) {
+
+  }
   this.addEventListener('click', f);
 
 }
