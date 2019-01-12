@@ -299,11 +299,15 @@ function checkIfSolution(puzzleSolution, currentState) {
    *  Ahora recorremos lar arrays, y si alguna posicion es incorrecta
    *  cambiamos la variable para devolver que el puzzle no esta resuelto.
    */
+  let newPuzzleSolution = [];
   for (let i = 0; i < puzzleSolution.length; i++) {
-    console.log(puzzleSolution);
-    console.log(currentState)
-    if (puzzleSolution[i] !== currentState[i]) {
-      return false
+    for (let j = 0; j < 2; j++) {
+      newPuzzleSolution.push(puzzleSolution[i][j]);
+    }
+  }
+  for (let i = 0; i < newPuzzleSolution.length; i++) {
+    if (newPuzzleSolution[i] !== currentState[i]) {
+      return false;
     }
   }
 
@@ -332,6 +336,8 @@ function initGame(imgURL, totalNumberPieces) {
   //Se añade el scr a la imagen.
   img.src = imgURL;
 
+  //Funcion para establecer un tiempo limite
+  timeStop();
 }
 
 /*
@@ -356,12 +362,27 @@ function f() {
     document.getElementById(selectedPiece).style.borderColor = 'black';
     selectedPiece = undefined;
     decreaseScore(1);
-    console.log(checkIfSolution(solution, mixedPuzzle));
-
-    if (checkIfSolution(solution, mixedPuzzle)) {
-    	alert('Has ganado crack');
+    //Obtenemos el estado actual del puzzle.
+    mixedPuzzle = [];
+    for (let i = 0; i < solution.length; i++) {
+      let newBackgroundPosition = document.getElementById('piece' + i).style.backgroundPosition;
+      let newBackgroundPositionArray = newBackgroundPosition.split(' ');
+      let bgPositionX = parseInt(newBackgroundPositionArray[1]);
+      let bgPositionY = parseInt(newBackgroundPositionArray[0]);
+      mixedPuzzle.push(bgPositionX, bgPositionY);
     }
-    //event.removeEventListener('click', f);
+    // Recogemos el texto del html.
+    let scoreFullString = document.getElementById('score').textContent;
+    let scoreSplit = scoreFullString.split(':');
+    if (checkIfSolution(solution, mixedPuzzle)) {
+      alert('Has ganado crack');
+      for (let i = 0; i < solution.length; i++) {
+        celda = document.getElementById('piece' + i);
+        celda.removeEventListener('click', f);
+      }
+    } else if (parseInt(scoreSplit[1]) <= 0) {
+      alert('Se te han acabado los puntos');
+    }
   }
 }
 
@@ -393,26 +414,34 @@ function gameLogic(image, totalNumberPieces) {
   //Obtenemos la solucion.
   solution = createReferenceSolution(image.width, image.height, totalNumberPieces);
 
-  //Obtenemos el estado actual del puzzle.
-  for (let i = 0; i < totalNumberPieces; i++) {
-  	let newBackgroundPosition = document.getElementById('piece' + i).style.backgroundPosition;
-    let newBackgroundPositionArray = newBackgroundPosition.split(' ');
-    let bgPositionX = parseInt(newBackgroundPositionArray[0]);
-    let bgPositionY = parseInt(newBackgroundPositionArray[1]);
-  	mixedPuzzle.push(bgPositionX, bgPositionY);
-  }
-
   for (let i = 0; i < totalNumberPieces; i++) {
     celda = document.getElementById('piece' + i);
     celda.addEventListener('click', f);
   }
 
+}
+function a() {
+  for (let i = 0; i < solution.length; i++) {
+    celda = document.getElementById('piece' + i);
+    celda.removeEventListener('click', f);
+  }
+  if (intervalID) {
+    alert('Se te ha acabado el tiempo');
+    clearInterval(intervalID);
+  }
+}
 
+function timeStop() {
+    intervalID = window.setInterval(a, 30000);
 }
 
 //Main Script
-initGame('cat.jpg', 9/*getNumberPiecesFromUser()*/);
-
 let selectedPiece = undefined;
 let solution = undefined;
+let intervalID = undefined;
 let mixedPuzzle = [];
+
+initGame('cat.jpg', 9/*getNumberPiecesFromUser()*/);
+
+
+
